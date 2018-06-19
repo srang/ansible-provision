@@ -1,6 +1,5 @@
 ---
-env_name: "dev"
-env_type: "dev"
-cluster_url: "https://192.168.42.70:8443"
-quotas:
-  configmaps: "150"
+display_name: "Development environment for {{ project name }}"
+# should be passed in
+cluster_token: {{ dev_token }}
+app_group_names: example_developers, example_admins

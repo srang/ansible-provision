@@ -1,3 +1,0 @@
----
-kubeconfig: "/home/srang/.kube/config"
-ansible_connection: local

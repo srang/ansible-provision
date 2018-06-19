@@ -1,4 +1,1 @@
 ---
-- hosts: dev
-  roles:
-    - role: sam-test
