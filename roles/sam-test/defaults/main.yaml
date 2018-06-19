@@ -1,0 +1,19 @@
+env_type: "dev"
+default_quotas:
+  persistentvolumeclaims: "50"
+  replicationcontrollers: "50"
+  services: "100"
+  limits.cpu: "10"
+  limits.memory: "10Gi"
+  pods: "50"
+  requests.cpu: "5"
+  requests.memory: "5Gi"
+  secrets: "150"
+env_quotas:
+  dev:
+    configmaps: "150"
+    services: "1000"
+    secrets: "150"
+  prod:
+    configmaps: "1000"
+    secrets: "1000"
