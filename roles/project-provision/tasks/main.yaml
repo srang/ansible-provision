@@ -1,25 +1,5 @@
 ---
-- name: "first test"
-  debug:
-    msg: "env: {{ kubeconfig }} {{ env_name }}"
-- name: "print out cluster_url"
-  debug:
-    msg: "value: {{ cluster_url }}"
+- include_tasks: facts.yaml
 
-- name: "ensure namespace"
-  oc_project:
-    name: "dotnet-example"
-    state: present
-    display_name: "My Dotnet example"
-    debug: true
-    kubeconfig: "{{ kubeconfig }}"
-- name: "set quotas"
-  oc_obj:
-    kubeconfig: "{{ kubeconfig }}"
-    name: core-object-counts
-    namespace: "dotnet-example"
-    state: present
-    kind: ResourceQuota
-    content:
-      path: /tmp/quota
-      data: "{{ lookup('template', 'quota.yaml.j2') | from_yaml }}"
+- name: "create namespace {{ project_name | default('NAMESPACE') }}"
+  include_tasks: namespace-provision.yaml

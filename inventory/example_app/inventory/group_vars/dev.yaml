@@ -1,5 +1,5 @@
 ---
-display_name: "Development environment for {{ project name }}"
+#display_name: "Development environment for {{ project name }}"
 # should be passed in
-cluster_token: {{ dev_token }}
-app_group_names: example_developers, example_admins
+cluster_token: "{{ dev_token }}"
+app_group_names: "example_developers, example_admins"

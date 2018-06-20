@@ -1,0 +1,53 @@
+---
+- include_role:
+    name: openshift-provision
+  vars:
+    openshift_clusters:
+    - connection:
+        server: "{{ cluster_url }}"
+        token: "{{ cluster_token }}"
+        insecure_skip_tls_verify: "{{ skip_tls | default(True) | bool }}"
+      projects:
+        - name: "{{ project_name }}"
+          labels:
+            application: "{{ project_name }}"
+            envtype: "{{ env_type }}"
+            chargeback_code: "{{ chargeback_code }}"
+          node_selector: region=app
+          role_bindings:
+            - role: admin
+              groups:
+                - "{{ app_group_names.split(',') }}"
+              users:
+                - system:serviceaccount:openshift:provisioner
+            - role: edit
+              users:
+                - system:serviceaccount:{{ project_name }}:jenkins
+          serviceaccounts:
+            - jenkins
+          resources:
+          - apiVersion: v1
+            kind: ResourceQuota
+            metadata:
+              name: compute-resources-time-bound
+            spec:
+              hard: "{{ quotas }}"
+          - apiVersion: v1
+            kind: LimitRange
+            metadata:
+              name: core-resource-limits
+            spec:
+              limits:
+              - type: container
+                default:
+                  cpu: "1"
+                  memory: "2Gi"
+                default_request:
+                  cpu: "100m"
+                  memory: "1Gi"
+                max:
+                  cpu: "4"
+                  memory: "10Gi"
+                min:
+                  cpu: "100m"
+                  memory: "10Mi"

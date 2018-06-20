@@ -1,1 +1,16 @@
 ---
+- name: "Provision dev build namespace"
+  hosts: dev:&build
+  tasks:
+  - include_role:
+      name: project-provision
+    when:
+      - build_namespace_enabled
+
+#- name: "Provision dev deploy namespace"
+#  hosts: dev:&deploy
+#  tasks:
+#  - include_role:
+#      name: project-provision
+#    when:
+#      - "{{ deploy_namespace_enabled | bool }}"

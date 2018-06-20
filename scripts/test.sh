@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-
-ansible-playbook -vvv -i inventory/app_team/inventory playbooks/pipeline-onboard.yaml
+OCP_TOKEN='qYkas701ziz0WVR50rxhus31abXjtmxiS4_kZS2eePQ'
+ansible-playbook -vvv -i inventory/example_app/inventory playbooks/pipeline-onboard.yaml -e dev_token="$OCP_TOKEN"

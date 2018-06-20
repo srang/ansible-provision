@@ -1,0 +1,22 @@
+---
+- name: "determine env_type"
+  set_fact:
+    env_type: "{{ env_type | default(default_env_type) }}"
+
+- name: "load env_type defaults"
+  set_fact:
+    cluster_url: "{{ cluster_url | default(envs[env_type]['cluster_url']) }}"
+#
+#- name: "debug stuff"
+#  debug:
+#    msg: "{{ default_quotas }}"
+#- name: "debug stuff"
+#  debug:
+#    msg: "{{ envs[env_type]['quotas'] }}"
+#- name: "debug stuff"
+#  debug:
+#    msg: "{{ quotas }}"
+
+- name: "merge quotas"
+  set_fact:
+    quotas: "{{ default_quotas | combine(envs[env_type]['quotas']) | combine(quotas) }}"
