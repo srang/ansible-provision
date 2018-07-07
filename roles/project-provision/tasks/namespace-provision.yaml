@@ -1,5 +1,8 @@
 ---
-- include_role:
+- include_tasks: facts.yaml
+
+- name: "create namespace and resources {{ project_name }}"
+  include_role:
     name: openshift-provision
   vars:
     openshift_clusters:
@@ -13,7 +16,7 @@
             application: "{{ project_name }}"
             envtype: "{{ env_type }}"
             chargeback_code: "{{ chargeback_code }}"
-          node_selector: region=app
+          node_selector: "{{ node_selector }}"
           role_bindings:
             - role: admin
               groups:

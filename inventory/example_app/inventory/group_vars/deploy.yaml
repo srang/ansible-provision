@@ -1,5 +1,0 @@
----
-project_name: example-app
-deploy_namespace_enabled: True
-quotas:
-  configmaps: 15

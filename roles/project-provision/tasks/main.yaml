@@ -1,5 +1,19 @@
 ---
-- include_tasks: facts.yaml
+- name: "Provision {{ env.name }} build namespace"
+  include_tasks:
+    name: namespace-provision.yaml
+  vars:
+    env_purpose: build
+    project_name: "{{ project_name }}-build"
+    env_type: "{{ env.name }}"
+  when:
+    - env['build']['enabled']
 
-- name: "create namespace {{ project_name | default('NAMESPACE') }}"
-  include_tasks: namespace-provision.yaml
+- name: "Provision {{ env.name }} deploy namespace"
+  include_tasks:
+    name: namespace-provision.yaml
+  vars:
+    env_purpose: deploy
+    env_type: "{{ env.name }}"
+  when:
+    - env['deploy']['enabled']

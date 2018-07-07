@@ -1,1 +1,1 @@
-../../ansible-role-openshift-provision
+../thirdparty-roles/openshift-provision/

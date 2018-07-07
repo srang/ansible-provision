@@ -1,8 +1,2 @@
-[build:children]
-dev
-
-[deploy:children]
-dev
-
-[dev]
+[ocp]
 localhost ansible_connection=local

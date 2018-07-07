@@ -1,21 +1,25 @@
-default_env_type: "dev"
-# whitelist
-deploy_namespace_enabled: False
-build_namespace_enabled: False
-quotas: {}
-default_quotas:
-  configmaps: "150"
-  limits.cpu: "50"
-  limits.memory: "100Gi"
-  persistentvolumeclaims: "10"
-  pods: "50"
-  requests.cpu: "10"
-  requests.memory: "100Gi"
-  requests.storage: "40Gi"
-  secrets: "150"
-envs:
+tshirts:
+  small:
+    secrets: "75"
+    configmaps: "75"
+    limits.cpu: "30"
+    limits.memory: 50Gi
+    persistentvolumeclaims: "10"
+    pods: "50"
+    requests.cpu: "10"
+    requests.memory: 25Gi
+    requests.storage: 40Gi
+  medium:
+    secrets: "150"
+    configmaps: "150"
+    limits.cpu: "50"
+    limits.memory: 100Gi
+    persistentvolumeclaims: "10"
+    pods: "50"
+    requests.cpu: "10"
+    requests.memory: 50Gi
+    requests.storage: 50Gi
+default_envs:
   dev:
-    cluster_url: "https://192.168.42.70:8443"
-    quotas:
-      configmaps: "350"
-      secrets: "150"
+    cluster_url: "https://192.168.42.188:8443"
+

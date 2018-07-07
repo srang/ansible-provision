@@ -1,0 +1,14 @@
+envs:
+  - env_type: dev
+    cluster_token: {{ token_vars['dev'] }}
+    build:
+      enabled: true
+      size: medium
+    deploy:
+      enabled: true
+      size: small
+  - env_type: qa
+    cluster_token: {{ token_vars['qa'] }}
+    deploy:
+      enabled: true
+      size: medium
