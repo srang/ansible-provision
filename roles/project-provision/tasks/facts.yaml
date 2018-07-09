@@ -24,15 +24,17 @@
 - name: "set rolebinding facts"
   block:
     - set_fact:
-        admin_users:  "{{ env[env_purpose]['access']['users']  | json_query('[?type==`admin`].name') | default(omit) }}"
-        edit_users:   "{{ env[env_purpose]['access']['users']  | json_query('[?type==`edit`].name')  | default(omit) }}"
-        read_users:   "{{ env[env_purpose]['access']['users']  | json_query('[?type==`read`].name')  | default(omit) }}"
-    - set_fact:
-        admin_groups: "{{ env[env_purpose]['access']['groups'] | json_query('[?type==`admin`].name') | default(omit) }}"
-        edit_groups:  "{{ env[env_purpose]['access']['groups'] | json_query('[?type==`edit`].name')  | default(omit) }}"
-        read_groups:  "{{ env[env_purpose]['access']['groups'] | json_query('[?type==`read`].name')  | default(omit) }}"
-    - set_fact:
-        role_bindings: "{{  }}"
+        role_bindings: "{{ env[env_purpose]['access'] | default(omit) }}"
+#    - set_fact:
+#        admin_users:  "{{ env[env_purpose]['access']['users']  | json_query('[?type==`admin`].name') | default(omit) }}"
+#        edit_users:   "{{ env[env_purpose]['access']['users']  | json_query('[?type==`edit`].name')  | default(omit) }}"
+#        read_users:   "{{ env[env_purpose]['access']['users']  | json_query('[?type==`read`].name')  | default(omit) }}"
+#    - set_fact:
+#        admin_groups: "{{ env[env_purpose]['access']['groups'] | json_query('[?type==`admin`].name') | default(omit) }}"
+#        edit_groups:  "{{ env[env_purpose]['access']['groups'] | json_query('[?type==`edit`].name')  | default(omit) }}"
+#        read_groups:  "{{ env[env_purpose]['access']['groups'] | json_query('[?type==`read`].name')  | default(omit) }}"
+#    - set_fact:
+#        role_bindings: "{{  }}"
 
 - name: "set namespace purpose facts"
   block:
@@ -47,6 +49,4 @@
       - "cluster_token: {{ cluster_token }}"
       - "size: {{ size }}"
       - "quota: {{ quotas }}"
-      - "admin_user: {{ admin_users }}"
-      - "read_groups: {{ read_groups }}"
       - "node_selector: {{ node_selector }}"

@@ -17,10 +17,10 @@
             envtype: "{{ env_type }}"
             chargeback_code: "{{ chargeback_code }}"
           node_selector: "{{ node_selector }}"
-          role_bindings:
-            - role: admin
-              users:
-                - "{{ admin_users  | default(omit) }}"
+          role_bindings: "{{ role_bindings }}"
+#            - role: admin
+#              users:
+#                - "{{ admin_users  | default(omit) }}"
 #              groups:
 #                - "{{ admin_groups | default(omit) }}"
 #            - role: edit

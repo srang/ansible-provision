@@ -1,6 +1,5 @@
 token_vars:
-  dev: 'P8y-9-dYZ6sXP7oVzhkb77TmZS5Jub-dGgtD4CLBE0M'
-#  qa: ''
+  dev: asdf
 envs:
   - env_type: dev
     cluster_token: "{{ token_vars['dev'] }}"
@@ -8,30 +7,26 @@ envs:
       enabled: true
       size: medium
       access:
-        groups:
-          - type: edit
-            name: samplegroup
-        users:
-          - type: admin
-            name: srang
-          - type: edit
-            name: developer
-          - type: read
-            name: analyst
-          - type: admin
-            name: system:serviceaccount:openshift:provisioner
+        - role: admin
+          users:
+            - srang
+            - system:serviceaccount:openshift:provisioner
+        - role: edit
+          users:
+            - system:serviceaccount:{{ project_name }}:default
+          groups:
+            - developers
     deploy:
       enabled: true
       size: small
       access:
-        groups:
-          - type: edit
-            name: samplegroup
-        users:
-          - type: admin
-            name: srang
-#  - env_type: qa
-#    cluster_token: "{{ token_vars['qa'] }}"
-#    deploy:
-#      enabled: true
-#      size: medium
+        - role: admin
+          users:
+            - srang
+            - system:serviceaccount:openshift:provisioner
+        - role: edit
+          users:
+            - system:serviceaccount:{{ project_name }}-build:default
+        - role: read
+          groups:
+            - developers
