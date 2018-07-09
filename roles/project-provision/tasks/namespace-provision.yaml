@@ -18,21 +18,6 @@
             chargeback_code: "{{ chargeback_code }}"
           node_selector: "{{ node_selector }}"
           role_bindings: "{{ role_bindings }}"
-#            - role: admin
-#              users:
-#                - "{{ admin_users  | default(omit) }}"
-#              groups:
-#                - "{{ admin_groups | default(omit) }}"
-#            - role: edit
-#              users:
-#                - "{{ edit_users   | default(omit) }}"
-#              groups:
-#                - "{{ edit_groups  | default(omit) }}"
-#            - role: read
-#              users:
-#                - "{{ read_users   | default(omit) }}"
-#              groups:
-#                - "{{ read_groups  | default(omit) }}"
           serviceaccounts:
             - jenkins
           resources:

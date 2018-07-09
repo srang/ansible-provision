@@ -1,5 +1,5 @@
 token_vars:
-  dev: asdf
+  dev:
 envs:
   - env_type: dev
     cluster_token: "{{ token_vars['dev'] }}"
