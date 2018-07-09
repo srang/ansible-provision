@@ -22,4 +22,10 @@ tshirts:
 default_envs:
   dev:
     cluster_url: "https://192.168.42.188:8443"
+default_purpose:
+  build:
+    node_selector: "region=build"
+  deploy:
+    node_selector: "region=app"
+minishift: false
 

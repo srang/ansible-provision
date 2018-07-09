@@ -1,7 +1,7 @@
 ---
 - include_tasks: facts.yaml
 
-- name: "create namespace and resources {{ project_name }}"
+- name: "create namespace and resources {{ ocp_project_name }}"
   include_role:
     name: openshift-provision
   vars:
@@ -9,23 +9,30 @@
     - connection:
         server: "{{ cluster_url }}"
         token: "{{ cluster_token }}"
-        insecure_skip_tls_verify: "{{ skip_tls | default(True) | bool }}"
+        insecure_skip_tls_verify: "True"
       projects:
-        - name: "{{ project_name }}"
+        - name: "{{ ocp_project_name }}"
           labels:
-            application: "{{ project_name }}"
+            application: "{{ ocp_project_name }}"
             envtype: "{{ env_type }}"
             chargeback_code: "{{ chargeback_code }}"
           node_selector: "{{ node_selector }}"
           role_bindings:
             - role: admin
-              groups:
-                - "{{ app_group_names.split(',') }}"
               users:
-                - system:serviceaccount:openshift:provisioner
-            - role: edit
-              users:
-                - system:serviceaccount:{{ project_name }}:jenkins
+                - "{{ admin_users  | default(omit) }}"
+#              groups:
+#                - "{{ admin_groups | default(omit) }}"
+#            - role: edit
+#              users:
+#                - "{{ edit_users   | default(omit) }}"
+#              groups:
+#                - "{{ edit_groups  | default(omit) }}"
+#            - role: read
+#              users:
+#                - "{{ read_users   | default(omit) }}"
+#              groups:
+#                - "{{ read_groups  | default(omit) }}"
           serviceaccounts:
             - jenkins
           resources:

@@ -1,19 +1,18 @@
 ---
-- name: "Provision {{ env.name }} build namespace"
-  include_tasks:
-    name: namespace-provision.yaml
+- name: "Provision {{ env.env_type }} build namespace"
+  include_tasks: namespace-provision.yaml
   vars:
     env_purpose: build
-    project_name: "{{ project_name }}-build"
-    env_type: "{{ env.name }}"
+    ocp_project_name: "{{ project_name }}-build"
+    env_type: "{{ env.env_type }}"
   when:
     - env['build']['enabled']
 
-- name: "Provision {{ env.name }} deploy namespace"
-  include_tasks:
-    name: namespace-provision.yaml
+- name: "Provision {{ env.env_type }} deploy namespace"
+  include_tasks: namespace-provision.yaml
   vars:
     env_purpose: deploy
-    env_type: "{{ env.name }}"
+    ocp_project_name: "{{ project_name }}"
+    env_type: "{{ env.env_type }}"
   when:
     - env['deploy']['enabled']

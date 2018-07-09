@@ -1,14 +1,37 @@
+token_vars:
+  dev: 'P8y-9-dYZ6sXP7oVzhkb77TmZS5Jub-dGgtD4CLBE0M'
+#  qa: ''
 envs:
   - env_type: dev
-    cluster_token: {{ token_vars['dev'] }}
+    cluster_token: "{{ token_vars['dev'] }}"
     build:
       enabled: true
       size: medium
+      access:
+        groups:
+          - type: edit
+            name: samplegroup
+        users:
+          - type: admin
+            name: srang
+          - type: edit
+            name: developer
+          - type: read
+            name: analyst
+          - type: admin
+            name: system:serviceaccount:openshift:provisioner
     deploy:
       enabled: true
       size: small
-  - env_type: qa
-    cluster_token: {{ token_vars['qa'] }}
-    deploy:
-      enabled: true
-      size: medium
+      access:
+        groups:
+          - type: edit
+            name: samplegroup
+        users:
+          - type: admin
+            name: srang
+#  - env_type: qa
+#    cluster_token: "{{ token_vars['qa'] }}"
+#    deploy:
+#      enabled: true
+#      size: medium

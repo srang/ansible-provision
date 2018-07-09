@@ -2,8 +2,9 @@
 - name: "Provision namespace"
   hosts: ocp
   tasks:
+
   - include_role:
       name: project-provision
-  loop: "{{ envs }}"
-  loop_control:
-    loop_var: env
+    with_items: "{{ envs }}"
+    loop_control:
+      loop_var: env
